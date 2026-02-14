@@ -213,6 +213,25 @@ body {
   border-radius: 10px;
 }
 
+.music-tap-hint {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  color: rgba(219,143,143,0.6);
+  text-align: center;
+  margin-top: 6px;
+  display: none;
+  letter-spacing: 1px;
+}
+
+@media (pointer: coarse) {
+  .music-player-frame iframe {
+    height: 80px;
+  }
+  .music-tap-hint {
+    display: block;
+  }
+}
+
 .music-now-playing {
   font-family: 'Cormorant Garamond', serif;
   font-size: 12px;
@@ -841,8 +860,9 @@ body {
       </span>
     </button>
     <div class="music-player-frame" id="playerFrame">
-      <iframe id="ytPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen title="Reproductor de música YouTube" loading="lazy"></iframe>
+      <div id="ytPlayer"></div>
     </div>
+    <div class="music-tap-hint" id="tapHint">Tocá ▶ play en el reproductor</div>
     <div class="music-now-playing" id="nowPlaying"></div>
   </div>
   <button class="music-btn" id="musicBtn" title="Música" aria-label="Abrir panel de música" aria-expanded="false">♫</button>
@@ -1137,10 +1157,44 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// ===== MUSIC PANEL (no inline onclick) =====
+// ===== MUSIC PANEL (YouTube IFrame API for mobile support) =====
 let currentVideoId = null;
+let ytPlayer = null;
+let ytReady = false;
 const musicBtn = document.getElementById('musicBtn');
 const musicDropdown = document.getElementById('musicDropdown');
+const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// Load YouTube IFrame API
+const ytScript = document.createElement('script');
+ytScript.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(ytScript);
+
+window.onYouTubeIframeAPIReady = function() {
+  ytPlayer = new YT.Player('ytPlayer', {
+    height: isMobile ? '80' : '60',
+    width: '100%',
+    playerVars: {
+      autoplay: 0,
+      loop: 1,
+      controls: 1,
+      modestbranding: 1,
+      rel: 0,
+      playsinline: 1
+    },
+    events: {
+      onReady: function() { ytReady = true; },
+      onStateChange: function(e) {
+        if (e.data === YT.PlayerState.PLAYING) {
+          musicBtn.classList.add('playing');
+          document.getElementById('tapHint').style.display = 'none';
+        } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+          musicBtn.classList.remove('playing');
+        }
+      }
+    }
+  });
+};
 
 function toggleMusicPanel() {
   const isOpen = musicDropdown.classList.toggle('show');
@@ -1152,17 +1206,26 @@ function toggleMusicPanel() {
 
 function playSong(videoId, btn) {
   currentVideoId = videoId;
-  const player = document.getElementById('ytPlayer');
-  player.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&loop=1&playlist=' + videoId;
   document.querySelectorAll('.song-select-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  musicBtn.classList.add('playing');
   const name = btn.querySelector('.song-name').textContent;
   const artist = btn.querySelector('.song-artist').textContent;
   document.getElementById('nowPlaying').textContent = '\u266A ' + name + ' \u2014 ' + artist;
+
+  if (ytReady && ytPlayer) {
+    ytPlayer.loadVideoById({
+      videoId: videoId,
+      suggestedQuality: 'small'
+    });
+    // On mobile, show tap hint since autoplay may be blocked
+    if (isMobile) {
+      document.getElementById('tapHint').style.display = 'block';
+    }
+    musicBtn.classList.add('playing');
+  }
 }
 
-// Event listeners instead of inline onclick
+// Event listeners
 musicBtn.addEventListener('click', toggleMusicPanel);
 
 document.querySelectorAll('.song-select-btn').forEach(btn => {
