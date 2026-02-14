@@ -563,6 +563,231 @@ body {
   color: rgba(219,143,143,0.75);
 }
 
+/* ===== STARRY SKY ===== */
+.starry-sky {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.star {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle var(--duration) ease-in-out infinite;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.star:hover {
+  transform: scale(3);
+  box-shadow: 0 0 12px 4px rgba(255,200,200,0.8);
+}
+
+.star-reason {
+  position: fixed;
+  padding: 14px 22px;
+  background: rgba(20,5,10,0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(219,143,143,0.4);
+  border-radius: 14px;
+  color: #f0c8c8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  max-width: 280px;
+  text-align: center;
+  z-index: 950;
+  opacity: 0;
+  transform: translateY(10px) scale(0.9);
+  transition: all 0.4s ease;
+  pointer-events: none;
+  box-shadow: 0 8px 30px rgba(180,60,80,0.3);
+}
+
+.star-reason.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; box-shadow: 0 0 6px 2px rgba(255,220,220,0.6); }
+}
+
+/* ===== LOVE COUNTER ===== */
+.love-counter {
+  text-align: center;
+  margin: 30px auto 0;
+  padding: 25px;
+  background: rgba(20,5,10,0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(219,143,143,0.2);
+  border-radius: 16px;
+  max-width: 500px;
+  animation: fadeInUp 2s ease 1.6s forwards;
+  opacity: 0;
+}
+
+.love-counter-label {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(20px, 3vw, 28px);
+  color: #d4909a;
+  margin-bottom: 12px;
+}
+
+.love-counter-values {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.counter-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  color: #f5c6c6;
+  text-shadow: 0 0 20px rgba(200,100,100,0.4);
+  line-height: 1;
+}
+
+.counter-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: rgba(219,160,160,0.8);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ===== SECRET MESSAGE ===== */
+.secret-heart {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  z-index: 900;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid rgba(219,143,143,0.4);
+  background: rgba(40,10,15,0.9);
+  backdrop-filter: blur(10px);
+  color: #e8a0a0;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(180,80,80,0.2);
+  animation: secretPulse 3s ease infinite;
+}
+
+.secret-heart:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 30px rgba(200,100,100,0.5);
+  border-color: rgba(219,143,143,0.8);
+}
+
+@keyframes secretPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(180,80,80,0.2); }
+  50% { box-shadow: 0 4px 25px rgba(200,100,100,0.5), 0 0 10px rgba(219,143,143,0.3); }
+}
+
+.secret-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(10,2,5,0.92);
+  backdrop-filter: blur(8px);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.secret-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.secret-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 40px 30px;
+  transform: scale(0.8) translateY(30px);
+  transition: transform 0.6s ease;
+}
+
+.secret-overlay.show .secret-content {
+  transform: scale(1) translateY(0);
+}
+
+.secret-emoji {
+  font-size: 60px;
+  margin-bottom: 20px;
+  animation: heartbeat 1.2s ease infinite;
+}
+
+.secret-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(28px, 5vw, 44px);
+  color: #f0c0c8;
+  line-height: 1.5;
+  text-shadow: 0 0 40px rgba(200,100,120,0.5);
+  margin-bottom: 20px;
+}
+
+.secret-subtext {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: rgba(235,195,200,0.85);
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.secret-close {
+  margin-top: 30px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: rgba(219,143,143,0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: color 0.3s;
+}
+
+.secret-close:hover { color: rgba(219,143,143,1); }
+
+/* ===== HEART TRAIL ===== */
+.heart-trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 950;
+  font-size: 14px;
+  opacity: 1;
+  animation: heartFloat 1.2s ease forwards;
+}
+
+@keyframes heartFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  50% { opacity: 0.7; transform: translateY(-20px) scale(1.2) rotate(15deg); }
+  100% { opacity: 0; transform: translateY(-50px) scale(0.5) rotate(-15deg); }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .section-content { max-width: 650px; padding: 45px 28px; }
@@ -573,6 +798,9 @@ body {
   .section-content { padding: 40px 25px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .music-panel { bottom: 15px; right: 15px; }
+  .secret-heart { bottom: 15px; left: 15px; width: 46px; height: 46px; font-size: 18px; }
+  .love-counter-values { gap: 14px; }
+  .counter-number { font-size: clamp(24px, 4vw, 36px); }
 }
 
 @media (max-width: 480px) {
@@ -592,6 +820,7 @@ body {
 </div>
 
 <div id="petals-container"></div>
+<div class="starry-sky" id="starrySky"></div>
 
 <!-- Music Panel -->
 <div class="music-panel">
@@ -633,6 +862,15 @@ body {
     <p class="intro-quote">
       Hay cosas que uno no sabe decir con palabras, no porque no las sienta, sino porque las siente demasiado. Pero hoy quiero intentarlo, porque te lo merecés, porque me lo merezco, y porque hay silencios que ya no quiero guardar.
     </p>
+    <div class="love-counter" aria-label="Contador de amor">
+      <div class="love-counter-label">Juntos hace...</div>
+      <div class="love-counter-values">
+        <div class="counter-unit"><span class="counter-number" id="counterDays">0</span><span class="counter-label">días</span></div>
+        <div class="counter-unit"><span class="counter-number" id="counterHours">0</span><span class="counter-label">horas</span></div>
+        <div class="counter-unit"><span class="counter-number" id="counterMins">0</span><span class="counter-label">minutos</span></div>
+        <div class="counter-unit"><span class="counter-number" id="counterSecs">0</span><span class="counter-label">segundos</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -817,6 +1055,22 @@ body {
   <p>Hecho con todo mi amor para vos ♥</p>
 </footer>
 
+<!-- Secret Message -->
+<button class="secret-heart" id="secretHeart" aria-label="Mensaje secreto">❤️</button>
+<div class="secret-overlay" id="secretOverlay">
+  <div class="secret-content">
+    <div class="secret-emoji">💕</div>
+    <div class="secret-text">Sos lo mejor que me pasó en la vida</div>
+    <p class="secret-subtext">
+      Este es mi secreto a voces: cada vez que te veo, el mundo se detiene un segundo y todo tiene sentido. No necesito nada más que tu sonrisa para saber que estoy donde tengo que estar.
+    </p>
+    <button class="secret-close" id="secretClose">toca para cerrar</button>
+  </div>
+</div>
+
+<!-- Star Reason Tooltip -->
+<div class="star-reason" id="starReason"></div>
+
 <script>
 // ===== LOADING SCREEN (dynamic - no artificial delay) =====
 window.addEventListener('load', () => {
@@ -939,6 +1193,111 @@ const bgObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '200px' });
 
 sectionBgs.forEach(bg => bgObserver.observe(bg));
+
+// ===== LOVE COUNTER (since Nov 11, 2025) =====
+const startDate = new Date('2025-11-11T00:00:00');
+function updateCounter() {
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const secs = Math.floor((diff % (1000*60)) / 1000);
+  document.getElementById('counterDays').textContent = days;
+  document.getElementById('counterHours').textContent = hours;
+  document.getElementById('counterMins').textContent = mins;
+  document.getElementById('counterSecs').textContent = secs;
+}
+updateCounter();
+setInterval(updateCounter, 1000);
+
+// ===== STARRY SKY WITH REASONS =====
+const loveReasons = [
+  'Por tu sonrisa que ilumina todo',
+  'Por cómo me mirás cuando hablo',
+  'Por tu paciencia infinita',
+  'Por las risas a las 3am',
+  'Por tu forma de abrazar',
+  'Porque me hacés querer ser mejor',
+  'Por tu voz cuando decís mi nombre',
+  'Por cómo te brillan los ojos',
+  'Por cada \"te quiero\" que me das',
+  'Porque elegís quedarte siempre',
+  'Por las aventuras que vivimos',
+  'Por tu manera de querer',
+  'Porque con vos todo es más lindo',
+  'Por los silencios que compartimos',
+  'Porque sos mi persona favorita',
+  'Por cada beso inesperado',
+  'Porque me conocés como nadie',
+  'Por tu risa contagiosa',
+  'Porque me das paz',
+  'Porque sos vos, simplemente vos'
+];
+
+const sky = document.getElementById('starrySky');
+const reasonTooltip = document.getElementById('starReason');
+let reasonTimeout;
+
+for (let i = 0; i < 60; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.width = (Math.random() * 3 + 1) + 'px';
+  star.style.height = star.style.width;
+  star.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
+  star.style.animationDelay = Math.random() * 5 + 's';
+  star.dataset.reason = loveReasons[i % loveReasons.length];
+
+  star.addEventListener('click', (e) => {
+    e.stopPropagation();
+    clearTimeout(reasonTimeout);
+    reasonTooltip.textContent = star.dataset.reason;
+    reasonTooltip.style.left = Math.min(e.clientX, window.innerWidth - 300) + 'px';
+    reasonTooltip.style.top = (e.clientY - 60) + 'px';
+    reasonTooltip.classList.add('show');
+    reasonTimeout = setTimeout(() => reasonTooltip.classList.remove('show'), 3000);
+  });
+
+  sky.appendChild(star);
+}
+
+// ===== SECRET MESSAGE =====
+const secretHeart = document.getElementById('secretHeart');
+const secretOverlay = document.getElementById('secretOverlay');
+const secretClose = document.getElementById('secretClose');
+
+secretHeart.addEventListener('click', () => {
+  secretOverlay.classList.add('show');
+});
+
+secretClose.addEventListener('click', () => {
+  secretOverlay.classList.remove('show');
+});
+
+secretOverlay.addEventListener('click', (e) => {
+  if (e.target === secretOverlay) secretOverlay.classList.remove('show');
+});
+
+// ===== HEART TRAIL ON CURSOR =====
+let lastTrail = 0;
+const heartChars = ['\u2764', '\u2665', '\uD83D\uDC95', '\uD83D\uDC96', '\uD83D\uDC97'];
+document.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastTrail < 120) return;
+  lastTrail = now;
+
+  const heart = document.createElement('div');
+  heart.className = 'heart-trail';
+  heart.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+  heart.style.left = e.clientX + 'px';
+  heart.style.top = e.clientY + 'px';
+  heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
+  heart.style.color = `hsl(${340 + Math.random() * 30}, 70%, ${60 + Math.random() * 20}%)`;
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 1200);
+});
 </script>
 </body>
 </html>
