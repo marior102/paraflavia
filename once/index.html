@@ -143,12 +143,44 @@ main section:first-child::before{display:none}
 .brindis.on{opacity:1}.brindis p{font-family:"Pinyon Script",cursive;font-size:clamp(58px,17vw,120px);line-height:1;color:var(--papel);text-shadow:0 0 30px var(--neon),0 0 60px var(--rosa)}
 .brindis small{font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ciudad);margin-top:14px}
 @media (prefers-reduced-motion:reduce){.btn-abrir,.onces span:last-child,.foto-hero img{animation:none}.pre{opacity:1;transform:none}}
+
+/* ---- Segunda mano de brillo ---- */
+#cielo{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header.hero,main,footer,#ciudad{position:relative;z-index:1}
+.tapa{background:none;overflow:hidden}
+.tapa>*{position:relative;z-index:2;transition:opacity .5s}
+.cort{position:absolute!important;top:0;bottom:0;width:50.5%;z-index:1!important;background:radial-gradient(140% 90% at 100% 100%,#3a0f1c 0%,#0a0c18 62%);transition:transform 1.5s cubic-bezier(.7,0,.2,1)!important;box-shadow:0 0 60px rgba(0,0,0,.8)}
+.cort.izq{left:0;border-right:1px solid rgba(243,199,129,.35)}
+.cort.der{right:0;transform:scaleX(-1);border-right:1px solid rgba(243,199,129,.35)}
+.tapa.fuera{opacity:1;visibility:hidden;transition:visibility 0s 1.6s}
+.tapa.fuera>*:not(.cort){opacity:0}
+.tapa.fuera .cort.izq{transform:translateX(-102%)}
+.tapa.fuera .cort.der{transform:scaleX(-1) translateX(-102%)}
+.tapa::before{z-index:2;transition:opacity .4s}.tapa.fuera::before{opacity:0}
+h1 em,.tapa-n,h2 em{background:linear-gradient(100deg,var(--neon) 35%,#ffe2b8 50%,var(--neon) 65%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:brillo 6s linear infinite}
+@keyframes brillo{from{background-position:120% 0}to{background-position:-100% 0}}
+.tapa-n{filter:drop-shadow(0 0 18px rgba(255,90,79,.55))}
+main section::before{display:none}
+.div{display:block;width:170px;height:34px;margin:0 auto 50px;overflow:visible}
+.div path{fill:none;stroke:var(--neon);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.2s ease;filter:drop-shadow(0 0 5px rgba(255,90,79,.8))}
+.div.on path{stroke-dashoffset:0}
+.tira{overflow:hidden;margin:34px 0 0;padding:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.tira div{display:flex;gap:10px;width:max-content;animation:correr 70s linear infinite}
+.tira img{height:150px;width:auto;border-radius:2px;border:4px solid #f4ecdd;box-shadow:0 10px 24px -8px rgba(0,0,0,.8)}
+.tira img:nth-child(odd){transform:rotate(-1.5deg)}.tira img:nth-child(even){transform:rotate(1.5deg) translateY(6px)}
+@keyframes correr{to{transform:translateX(-50%)}}
+body.sonando .onces span:last-child{animation:pulso .769s ease-in-out infinite}
+body.sonando .play{animation:pulso2 .769s ease-in-out infinite}
+@keyframes pulso{0%,100%{text-shadow:0 0 22px rgba(255,90,79,.4)}12%{text-shadow:0 0 60px rgba(255,90,79,1),0 0 110px rgba(196,32,58,.7)}}
+@keyframes pulso2{0%,100%{transform:scale(1)}12%{transform:scale(1.07)}}
+@media (prefers-reduced-motion:reduce){h1 em,.tapa-n,h2 em,.tira div,body.sonando .onces span:last-child,body.sonando .play{animation:none}.div path{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
 
 <canvas id="petalos" aria-hidden="true"></canvas><div class="prog" id="prog"></div><div id="lb"><img alt=""></div><div class="brindis" id="brindis"><p>Feliz cumpleaños,<br>Flavia</p><small>11 · 11 · 2026</small></div>
-<div class="tapa" id="tapa"><p class="eyebrow">Para Flavia</p><p class="tapa-n">11 · 11</p><h2>Tu cumpleaños y nuestro primer año</h2><button class="btn-abrir" type="button" id="abrir">Abrir tu regalo</button><p class="pie">Subí el volumen: tiene nuestra canción.</p></div>
+<canvas id="cielo" aria-hidden="true"></canvas>
+<div class="tapa" id="tapa"><div class="cort izq"></div><div class="cort der"></div><p class="eyebrow">Para Flavia</p><p class="tapa-n">11 · 11</p><h2>Tu cumpleaños y nuestro primer año</h2><button class="btn-abrir" type="button" id="abrir">Abrir tu regalo</button><p class="pie">Subí el volumen: tiene nuestra canción.</p></div>
 <button class="play" type="button" id="play">▶ Nuestra canción</button>
 <header class="hero col">
   <p class="eyebrow">Para Flavia · 11 de noviembre de 2026</p>
@@ -230,6 +262,8 @@ main section:first-child::before{display:none}
     <figure class="tercio"><img src="img/marzo28.jpg" alt="Flavia sacándose una foto de noche"></figure>
   </div>
 </section>
+
+<div class="tira" aria-hidden="true"><div><img src="img/penasco.jpg" alt=""><img src="img/rosas.jpg" alt=""><img src="img/once.jpg" alt=""><img src="img/azotea.jpg" alt=""><img src="img/encarnacion.jpg" alt=""><img src="img/valentin.jpg" alt=""><img src="img/marzo.jpg" alt=""><img src="img/mate.jpg" alt=""><img src="img/cafe1.jpg" alt=""><img src="img/rio.jpg" alt=""><img src="img/julio.jpg" alt=""><img src="img/verde.jpg" alt=""><img src="img/verde2.jpg" alt=""><img src="img/sol.jpg" alt=""><img src="img/paz.jpg" alt=""><img src="img/ruta.jpg" alt=""><img src="img/gala1.jpg" alt=""><img src="img/gala.jpg" alt=""><img src="img/ella.jpg" alt=""><img src="img/cumple.jpg" alt=""><img src="img/penasco.jpg" alt=""><img src="img/rosas.jpg" alt=""><img src="img/once.jpg" alt=""><img src="img/azotea.jpg" alt=""><img src="img/encarnacion.jpg" alt=""><img src="img/valentin.jpg" alt=""><img src="img/marzo.jpg" alt=""><img src="img/mate.jpg" alt=""><img src="img/cafe1.jpg" alt=""><img src="img/rio.jpg" alt=""><img src="img/julio.jpg" alt=""><img src="img/verde.jpg" alt=""><img src="img/verde2.jpg" alt=""><img src="img/sol.jpg" alt=""><img src="img/paz.jpg" alt=""><img src="img/ruta.jpg" alt=""><img src="img/gala1.jpg" alt=""><img src="img/gala.jpg" alt=""><img src="img/ella.jpg" alt=""><img src="img/cumple.jpg" alt=""></div></div>
 
 <section class="col">
   <p class="eyebrow">La canción que te escribí</p>
@@ -388,6 +422,22 @@ lb.onclick=()=>lb.classList.remove('on');
 $('soplar').addEventListener('click',()=>{if(!$('velaCaja').classList.contains('apagada'))return;const b=$('brindis');b.classList.add('on');setTimeout(()=>b.classList.remove('on'),5200);
   if(calma)return;let k=0;const t=setInterval(()=>{estallar(innerWidth*(.15+Math.random()*.7),innerHeight*(.15+Math.random()*.45),70);if(++k>9)clearInterval(t);},420);});
 $('abrir').addEventListener('click',()=>{if(!calma){estallar(innerWidth/2,innerHeight*.45,120);}});
+// ---- Segunda mano ----
+// cielo con estrellas y fugaces
+(function(){const c=$('cielo'),x=c.getContext('2d');let W,H,st=[],fu=null;
+ function tam(){const r=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*r;c.height=H*r;x.setTransform(r,0,0,r,0,0);st=[];for(let i=0;i<Math.round(W*H/5200);i++)st.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+.2,f:Math.random()*6.28,v:.3+Math.random()*1.2});}
+ function fr(t){x.clearRect(0,0,W,H);for(const s of st){x.globalAlpha=calma?.5:.18+.42*(.5+.5*Math.sin(s.f+t/1000*s.v));x.fillStyle='#fff4dc';x.beginPath();x.arc(s.x,s.y,s.r,0,6.28);x.fill();}
+  if(!calma){if(!fu&&Math.random()<.004)fu={x:Math.random()*W*.8,y:Math.random()*H*.4,l:1};
+   if(fu){const g=x.createLinearGradient(fu.x,fu.y,fu.x-90,fu.y-36);g.addColorStop(0,'rgba(255,244,220,'+fu.l+')');g.addColorStop(1,'rgba(255,244,220,0)');x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=1.6;x.beginPath();x.moveTo(fu.x,fu.y);x.lineTo(fu.x-90,fu.y-36);x.stroke();fu.x+=9;fu.y+=3.6;fu.l-=.02;if(fu.l<=0)fu=null;}
+   requestAnimationFrame(fr);}}
+ tam();addEventListener('resize',()=>{tam();if(calma)fr(0);});requestAnimationFrame(fr);})();
+// separadores que se dibujan
+document.querySelectorAll('main section').forEach((sec,i)=>{if(!i)return;sec.insertAdjacentHTML('afterbegin','<svg class="div" viewBox="0 0 170 34" aria-hidden="true"><path d="M2 20 H58 C60 20 62 14 66 14 C72 14 72 4 79 4 C84 4 85 9 85 11 C85 9 86 4 91 4 C98 4 98 14 104 14 C108 14 110 20 112 20 H168 M85 11 C85 22 72 24 85 31 C98 24 85 22 85 11"/></svg>');});
+if('IntersectionObserver' in window){const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io2.unobserve(e.target);}}),{threshold:.6});document.querySelectorAll('.div').forEach(d=>io2.observe(d));}else document.querySelectorAll('.div').forEach(d=>d.classList.add('on'));
+// latido con la canción
+aud.addEventListener('play',()=>document.body.classList.add('sonando'));aud.addEventListener('pause',()=>document.body.classList.remove('sonando'));
+// deslizar las doce luces
+(function(){const m=document.querySelector('.momento');let x0=null;m.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});m.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>45)ver(act+(dx<0?1:-1));x0=null;},{passive:true});})();
 </script>
 </body>
 </html>
