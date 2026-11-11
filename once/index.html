@@ -174,11 +174,22 @@ body.sonando .play{animation:pulso2 .769s ease-in-out infinite}
 @keyframes pulso{0%,100%{text-shadow:0 0 22px rgba(255,90,79,.4)}12%{text-shadow:0 0 60px rgba(255,90,79,1),0 0 110px rgba(196,32,58,.7)}}
 @keyframes pulso2{0%,100%{transform:scale(1)}12%{transform:scale(1.07)}}
 @media (prefers-reduced-motion:reduce){h1 em,.tapa-n,h2 em,.tira div,body.sonando .onces span:last-child,body.sonando .play{animation:none}.div path{stroke-dashoffset:0}}
+
+/* ---- Mucho antes de todo ---- */
+.linea{border-left:1px solid var(--linea);margin:34px 0 0 8px;padding:6px 0 6px 26px;display:grid;gap:64px}
+.escena{position:relative}
+.escena::before{content:"";position:absolute;left:-32px;top:14px;width:11px;height:11px;border-radius:50%;background:var(--ciudad);box-shadow:0 0 16px 4px rgba(243,199,129,.55)}
+.anio{font-family:var(--display);font-size:clamp(64px,20vw,104px);line-height:.9;color:transparent;-webkit-text-stroke:1px var(--ciudad);letter-spacing:-.02em;margin-bottom:14px}
+.anio.txt{font-size:clamp(34px,9.5vw,50px);font-style:italic;-webkit-text-stroke:0;color:var(--ciudad);line-height:1.05}
+.escena p+p{margin-top:12px}
+.dios{font-family:var(--display);font-style:italic;font-size:clamp(34px,9.6vw,54px);line-height:1.12;text-align:center;margin:84px auto 10px;max-width:12em;text-wrap:balance;text-shadow:0 0 30px rgba(243,199,129,.35)}
+.veinti{font-family:var(--display);font-size:clamp(150px,48vw,280px);line-height:.8;text-align:center;margin:10px 0 0;background:linear-gradient(100deg,var(--neon) 35%,#ffe2b8 50%,var(--neon) 65%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:brillo 6s linear infinite;filter:drop-shadow(0 0 26px rgba(255,90,79,.45))}
+.veinti+p{text-align:center;margin:6px auto 34px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--ciudad)}
 </style>
 </head>
 <body>
 
-<canvas id="petalos" aria-hidden="true"></canvas><div class="prog" id="prog"></div><div id="lb"><img alt=""></div><div class="brindis" id="brindis"><p>Feliz cumpleaños,<br>Flavia</p><small>11 · 11 · 2026</small></div>
+<canvas id="petalos" aria-hidden="true"></canvas><div class="prog" id="prog"></div><div id="lb"><img alt=""></div><div class="brindis" id="brindis"><p>Felices 29,<br>Flavia</p><small>11 · 11 · 2026</small></div>
 <canvas id="cielo" aria-hidden="true"></canvas>
 <div class="tapa" id="tapa"><div class="cort izq"></div><div class="cort der"></div><p class="eyebrow">Para Flavia</p><p class="tapa-n">11 · 11</p><h2>Tu cumpleaños y nuestro primer año</h2><button class="btn-abrir" type="button" id="abrir">Abrir tu regalo</button><p class="pie">Subí el volumen: tiene nuestra canción.</p></div>
 <button class="play" type="button" id="play">▶ Nuestra canción</button>
@@ -194,12 +205,35 @@ body.sonando .play{animation:pulso2 .769s ease-in-out infinite}
     <div><b id="s">00</b><span>segundos</span></div>
   </div>
   <p class="pie">Contados desde el 11 de noviembre de 2025.</p>
-  <div class="extras"><span><b>12</b> onces</span><span><b>52</b> semanas</span><span><b>1</b> sí que lo cambió todo</span></div>
+  <div class="extras"><span><b>12</b> onces</span><span>casi <b>12</b> años de conocerte</span><span><b>1</b> sí que lo cambió todo</span></div>
 </header>
 
 <canvas id="ciudad" aria-hidden="true"></canvas>
 
 <main>
+<section class="col">
+  <p class="eyebrow">Mucho antes de todo</p>
+  <h2>Nuestra historia <em>no empezó hace un año</em></h2>
+  <div class="linea">
+    <div class="escena">
+      <p class="anio">2014</p>
+      <p>Yo trabajaba con tu papá. Era mi mentor y mi guía: mucho de lo que soy lo aprendí a su lado.</p>
+      <p>Vos eras apenas una niña que andaba por ahí. Yo ni te miraba.</p>
+    </div>
+    <div class="escena">
+      <p class="anio txt">Cuando él se fue</p>
+      <p>Lo sentí mucho. Todavía lo siento.</p>
+      <p>Con el tiempo empezamos a hablar. Un saludo, alguna palabra, y nada más.</p>
+    </div>
+    <div class="escena">
+      <p class="anio txt">Una noche de Halloween</p>
+      <p>Una invitación a una fiesta. Me sacaste de la mano, y sentí algo.</p>
+      <p>Lo intentamos. No era nuestro momento.</p>
+    </div>
+  </div>
+  <p class="dios">Pero el tiempo de Dios es perfecto.</p>
+</section>
+
 <section class="col">
   <p class="eyebrow">Antes del once · 28 de septiembre de 2025</p>
   <h2>El cerro</h2>
@@ -326,12 +360,14 @@ y recién te empiezo a contar</p>
   <div class="sombra">
     <p>A veces tenemos problemas. No lo voy a esconder detrás de fotos lindas: hay días torcidos, silencios largos y palabras que me salen mal.</p>
     <p class="voz">Gracias por tratar siempre de sobrellevar. Por quedarte cuando irse era más fácil.</p>
+    <p>Los dos sabemos lo que es perder a un padre. Y aun así miramos el mundo distinto. Hoy veo tu realidad, y entiendo mucho más las cosas.</p>
     <p>Un año no se mide solo por lo que se festeja. También por lo que se atraviesa. Y lo atravesamos juntos.</p>
   </div>
 </section>
 
 <section class="col final">
   <p class="eyebrow">Hoy · 11 de noviembre de 2026</p>
+  <p class="veinti">29</p><p>años tuyos · casi doce de conocerte · uno de elegirte</p>
   <h2>Feliz cumpleaños, <em>mi amor</em></h2>
   <div class="par">
     <figure><img src="img/ella.jpg" alt="Flavia sonriendo a la cámara"></figure>
@@ -344,6 +380,7 @@ y recién te empiezo a contar</p>
       <p style="margin-top:12px"><button class="btn" type="button" id="soplar">Soplar la vela</button></p>
     </div>
   </div>
+  <p class="voz">Quién diría que aquella niña que conocí hace casi doce años, y que ni miraba, sería hoy la mujer de mi vida.</p>
   <p>No soy fácil de llevar, y aun así te quedaste. Tu sonrisa es el lugar donde descanso de mí mismo. Gracias por la paciencia, por la calma, por cada once.</p>
   <p class="voz">Sin ti era algo. Contigo ya soy todo.</p>
   <p>Feliz primer año. Que el que viene nos encuentre en el mismo lugar: uno al lado del otro.</p>
@@ -412,7 +449,7 @@ if(!calma){ptam();addEventListener('resize',ptam);for(let i=0;i<(innerWidth<600?
 addEventListener('scroll',()=>{const d=document.documentElement;$('prog').style.width=(100*d.scrollTop/Math.max(1,d.scrollHeight-innerHeight))+'%';},{passive:true});
 // aparecer al bajar
 if(!calma&&'IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('pre');io.unobserve(e.target);}}),{threshold:.12});
-  document.querySelectorAll('main h2, main .voz, main figure, .momento, .sombra, .cancion p, .vela-caja, .firma').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rev','pre');io.observe(el);}else el.classList.add('rev');});}
+  document.querySelectorAll('main h2, main .voz, main figure, .escena, .dios, .veinti, .momento, .sombra, .cancion p, .vela-caja, .firma').forEach(el=>{if(el.getBoundingClientRect().top>innerHeight){el.classList.add('rev','pre');io.observe(el);}else el.classList.add('rev');});}
 // corazones al tocar
 addEventListener('pointerdown',e=>{if(calma||e.target.closest('button,audio,video'))return;const h=document.createElement('span');h.className='corazon';h.textContent='♥';h.style.left=(e.clientX-8)+'px';h.style.top=(e.clientY-14)+'px';h.style.setProperty('--dx',(Math.random()*50-25)+'px');document.body.appendChild(h);setTimeout(()=>h.remove(),1200);});
 // ampliar fotos
