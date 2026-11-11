@@ -211,6 +211,10 @@ a.btn{display:inline-block;text-decoration:none}
 .tiktok-caja{margin-top:26px;border-radius:10px;overflow:hidden;min-height:120px}
 .tiktok-caja blockquote{border:0;padding:0}
 .tiktok-caja section::before{display:none}
+.bailes{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:26px 20px 18px;margin:8px -20px 0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.bailes::-webkit-scrollbar{display:none}
+.bailes video{flex:none;width:min(64vw,270px);aspect-ratio:9/16;object-fit:cover;border-radius:18px;scroll-snap-align:center;background:#000;border:1px solid rgba(243,199,129,.5);box-shadow:0 0 0 5px #11131f,0 0 0 6px rgba(255,90,79,.55),0 24px 50px -16px rgba(255,90,79,.5);transition:transform .4s,opacity .4s;opacity:.55;transform:scale(.94)}
+.bailes video.viva{opacity:1;transform:scale(1)}
 </style>
 </head>
 <body>
@@ -310,12 +314,9 @@ a.btn{display:inline-block;text-decoration:none}
 <section class="col">
   <p class="eyebrow">Para la que baila</p>
   <h2>Verte bailar <em>es mi parte favorita</em></h2>
-  <p>A vos te encanta bailar. A mí, mirarte. Acá están tus bailes, para que veas lo que yo veo.</p>
-  <div class="tiktok-caja">
-    <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@flaviagomezc" data-unique-id="flaviagomezc" data-embed-type="creator" style="max-width:780px;min-width:288px;margin:0 auto">
-      <section><a target="_blank" rel="noopener" href="https://www.tiktok.com/@flaviagomezc?refer=creator_embed">@flaviagomezc</a></section>
-    </blockquote>
-  </div>
+  <p>A vos te encanta bailar. A mí, mirarte. Acá están tus bailes, para que veas lo que yo veo cuando bailás.</p>
+  <div class="bailes" id="bailes"><video src="vid/baile1.mp4" poster="img/baile1.jpg" muted loop playsinline preload="none"></video><video src="vid/baile2.mp4" poster="img/baile2.jpg" muted loop playsinline preload="none"></video><video src="vid/baile3.mp4" poster="img/baile3.jpg" muted loop playsinline preload="none"></video><video src="vid/baile4.mp4" poster="img/baile4.jpg" muted loop playsinline preload="none"></video><video src="vid/baile5.mp4" poster="img/baile5.jpg" muted loop playsinline preload="none"></video></div>
+  <p class="pie" style="text-align:center">Deslizá para ver más →</p>
   <p class="centro"><a class="btn" href="https://www.tiktok.com/@flaviagomezc" target="_blank" rel="noopener">Abrir su TikTok</a></p>
 </section>
 
@@ -514,7 +515,9 @@ aud.addEventListener('play',()=>document.body.classList.add('sonando'));aud.addE
 // deslizar las doce luces
 (function(){const m=document.querySelector('.momento');let x0=null;m.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;},{passive:true});m.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>45)ver(act+(dx<0?1:-1));x0=null;},{passive:true});})();
 
+// bailes: suena solo el que está en el centro
+(function(){const vs=[...document.querySelectorAll('#bailes video')];if(!('IntersectionObserver' in window)){vs.forEach(v=>{v.classList.add('viva');v.play().catch(()=>{});});return;}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(e.intersectionRatio>.7){v.classList.add('viva');v.play().catch(()=>{});}else{v.classList.remove('viva');v.pause();}}),{root:null,threshold:[0,.7,1]});vs.forEach(v=>io.observe(v));})();
 </script>
-<script async src="https://www.tiktok.com/embed.js"></script>
 </body>
 </html>
